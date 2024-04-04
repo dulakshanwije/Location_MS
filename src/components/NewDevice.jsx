@@ -31,6 +31,10 @@ export default function NewDevice() {
                 <option value="">Deactive</option>
               </select>
             </span>
+            <span>
+              <label htmlFor="image">Device Image:</label>
+              <input type="file" name="" id="image" accept="image/*" />
+            </span>
             <div className={styles.button_container}>
               <input type="reset" value="Reset" />
               <input type="submit" value="Submit" />

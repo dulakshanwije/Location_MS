@@ -5,6 +5,9 @@ export default function DeviceItem({ serial_no, type, isActive }) {
       <span
         className={isActive ? styles.active_mark : styles.deactive_mark}
       ></span>
+      <span className={styles.bin_icon}>
+        <img src="./bin.svg" alt="" />
+      </span>
       <div className={styles.image_container}>
         <img src="./images.jpeg" alt="" />
       </div>

@@ -45,6 +45,17 @@
   color: #ebebef;
   box-sizing: border-box;
 }
+.formitems_container input[type="file"] {
+  padding: 5px;
+  width: 100%;
+  font-size: 1.125rem;
+  font-weight: 300;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #b2b5be79;
+  color: #ebebef;
+  box-sizing: border-box;
+}
 
 .formitems_container input[type="text"]:focus {
   outline: none;
@@ -91,9 +102,14 @@
   border: 1px solid #ebebef;
   color: #ebebef;
 }
-
 .button_container input[type="submit"] {
   background-color: #ebebef;
   border: none;
   font-weight: 400;
+}
+.button_container input[type="reset"]:hover {
+  cursor: pointer;
+}
+.button_container input[type="submit"]:hover {
+  cursor: pointer;
 }

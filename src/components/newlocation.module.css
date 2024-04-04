@@ -77,3 +77,9 @@
   border: none;
   font-weight: 400;
 }
+.button_container input[type="reset"]:hover {
+  cursor: pointer;
+}
+.button_container input[type="submit"]:hover {
+  cursor: pointer;
+}

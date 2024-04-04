@@ -3,7 +3,9 @@ export default function AddLocationItem({ title }) {
   return (
     <div className={styles.container}>
       <p className={styles.title}>{title}</p>
-      <p>+</p>
+      <div className={styles.add_icon}>
+        <img src="./add.svg" alt="" />
+      </div>
     </div>
   );
 }

@@ -10,9 +10,9 @@ export default function App() {
     <>
       <Header />
       {/* <Locations /> */}
-      {/* <SingleLocation /> */}
+      <SingleLocation />
       {/* <NewLocation /> */}
-      <NewDevice />
+      {/* <NewDevice /> */}
     </>
   );
 }

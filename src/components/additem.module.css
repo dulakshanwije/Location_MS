@@ -34,3 +34,13 @@
   top: 0px;
   font-style: italic;
 }
+
+.add_icon img {
+  width: 60px;
+  height: auto;
+}
+
+.add_icon {
+  width: 60px;
+  height: 60px;
+}
