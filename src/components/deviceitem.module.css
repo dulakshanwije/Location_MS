@@ -1,0 +1,75 @@
+.container {
+  border: 1px solid #b2b5be;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  min-height: 130px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.container:hover {
+  cursor: pointer;
+  scale: 1.01;
+  transition: 0.2s;
+}
+
+.container p {
+  font-size: 1rem;
+  margin: 5px 0px;
+  color: #b2b5be;
+}
+
+.container .title {
+  color: #ebebef;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 5px 0px;
+}
+
+.active_mark {
+  width: 15px;
+  background-color: green;
+  height: 15px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.deactive_mark {
+  width: 15px;
+  background-color: grey;
+  height: 15px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.image_container {
+  width: 100px;
+  width: 100px;
+  margin-right: 10px;
+}
+.image_container img {
+  height: 100px;
+  width: auto;
+}
+
+.description {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-around;
+}
+
+.description .s_no {
+  font-size: 0.75rem;
+}

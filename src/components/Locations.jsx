@@ -1,10 +1,10 @@
-import AddLocationItem from "./AddLocationItem";
+import AddLocationItem from "./AddItem";
 import LocationItem from "./LocationItem";
 import styles from "./locations.module.css";
 export default function Locations() {
   return (
     <div className={styles.container}>
-      <p>Locations</p>
+      <p className={styles.title}>Locations</p>
       <hr className={styles.line} />
       <div className={styles.grid_container}>
         <LocationItem
@@ -31,8 +31,7 @@ export default function Locations() {
           phone={"+94 717198680"}
           device_count={4}
         />
-        <AddLocationItem />
-        <AddLocationItem />
+        <AddLocationItem title={"Add New Location"} />
       </div>
     </div>
   );

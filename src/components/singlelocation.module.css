@@ -4,11 +4,26 @@
 }
 
 .container .title {
-  font-size: 1.5rem;
   color: #ebebef;
   font-weight: 200;
   margin-top: 40px;
   margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.table_container {
+  font-size: 1.125rem;
+  padding-top: 20px;
+  font-weight: 300;
+  color: #ebebef;
+  width: 100%;
+}
+.table_container table {
+  width: 100%;
+}
+.table_container table td {
+  padding: 10px 0px;
+  width: 25%;
 }
 
 .grid_container {

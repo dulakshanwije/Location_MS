@@ -6,7 +6,7 @@ export default function LocationItem({ name, address, phone, device_count }) {
       <span>
         <p>{address}</p>
         <p>{phone}</p>
-        <p>No of Deveices: {device_count}</p>
+        <p>No of Devices: {device_count}</p>
       </span>
     </div>
   );

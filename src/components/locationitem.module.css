@@ -11,6 +11,12 @@
   justify-content: space-between;
 }
 
+.container:hover {
+  cursor: pointer;
+  scale: 1.01;
+  transition: 0.2s;
+}
+
 .container p {
   font-size: 1rem;
   margin: 5px 0px;
