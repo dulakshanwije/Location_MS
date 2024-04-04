@@ -1,0 +1,40 @@
+.container {
+  background-color: #20242f;
+}
+
+.sub_container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0px;
+  box-sizing: border-box;
+}
+
+.sub_container p {
+  font-size: 1.5rem;
+  color: #ebebef;
+}
+
+.sub_container button {
+  background-color: #363a45;
+  border: none;
+  margin: 0px 5px;
+  border-radius: 5px;
+  width: 200px;
+  padding: 8px 0px;
+  color: #b2b5be;
+  cursor: pointer;
+}
+
+.sub_container button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sub_container .active {
+  color: #ebebef;
+  font-weight: 400;
+  border: 1px solid #ebebef;
+}

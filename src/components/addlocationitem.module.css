@@ -1,0 +1,21 @@
+.container {
+  border: 1px dashed#b2b5be;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  min-height: 130px;
+}
+
+.container p {
+  font-size: 1rem;
+  margin: 5px 0px;
+  color: #b2b5be;
+}
+
+.container .title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 5px 0px;
+}

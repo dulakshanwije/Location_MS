@@ -1,0 +1,4 @@
+#0d111d : dark-blue
+#20242f : light-blue
+color: #b2b5be : light-grey
+white - #ebebef
