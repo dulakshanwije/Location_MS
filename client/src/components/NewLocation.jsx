@@ -59,7 +59,7 @@ export default function NewLocation() {
             <div className={styles.button_container}>
               <input type="reset" value="Reset" />
               {isLoading ? (
-                <input type="submit" value="Wait..." disabled />
+                <input type="submit" value="Saving..." disabled />
               ) : (
                 <input type="submit" value="Submit" />
               )}

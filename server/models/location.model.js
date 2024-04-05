@@ -7,7 +7,7 @@ const DeviceSchema = new Schema({
     require: true,
     uniqe: true,
   },
-  device_type: {
+  type: {
     type: "String",
     require: true,
   },

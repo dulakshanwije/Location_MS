@@ -1,13 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 const app = express();
 const Location = require("./models/location.model");
-const Device = require("./models/device.model");
 
 // JSON middleware
 app.use(express.json());
 app.use(cors());
+app.use(express.static("public/"));
 
 app.get("/", function (req, res) {
   res.send("Hello World");
@@ -39,31 +40,37 @@ app.post("/api/add_location", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
+/////////////////////////////////////////////////////////////////////
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, "image" + "-" + uniqueSuffix + path.extname(file.originalname));
+  },
+});
 
+const upload = multer({ storage: storage });
+////////////////////////////////////////////////////////
 // Add device
-app.post(
-  "/api/add_device/:id",
-  upload.single("body.image"),
-  async (req, res) => {
-    try {
-      const { id } = req.params;
-      const location = await Location.findByIdAndUpdate(id, {
-        $push: { devices: req.body },
-      });
-      if (!location) {
-        res.status(404).json("Location Not Found!");
-      }
-      const updatedLocation = await Location.findById(id);
-      res.status(200).json(updatedLocation);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+app.post("/api/add_device/:id", upload.single("image"), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = { ...req.body, image: req.file.filename };
+    const location = await Location.findByIdAndUpdate(id, {
+      $push: { devices: data },
+    });
+    if (!location) {
+      res.status(404).json("Location Not Found!");
     }
-    // console.log(req.body);
+    const updatedLocation = await Location.findById(id);
+    res.status(200).json(updatedLocation);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-);
+});
 
 // Get All Locations
 app.get("/api/get_locations", async (req, res) => {

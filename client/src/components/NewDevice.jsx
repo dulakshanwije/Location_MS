@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styles from "./newdevice.module.css";
 import axios from "axios";
 export default function NewDevice() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState("");
   const [data, setData] = useState({
     s_no: "",
@@ -31,16 +33,18 @@ export default function NewDevice() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(data);
+    setIsLoading(true);
     await axios
-      .post(`http://localhost:3000/api/add_device/${id}`, data)
+      .post(`http://localhost:3000/api/add_device/${id}`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((res) => {
-        alert("Location Added.");
-        // navigate("/");
-        // setIsLoading(false);
+        alert(`New device added to ${location}`);
+        navigate(`/location/${id}`);
+        setIsLoading(false);
       })
       .catch((e) => {
-        // setIsLoading(false);
+        setIsLoading(false);
         console.log(e);
       });
   }
@@ -93,7 +97,11 @@ export default function NewDevice() {
             </span>
             <div className={styles.button_container}>
               <input type="reset" value="Reset" />
-              <input type="submit" value="Submit" />
+              {isLoading ? (
+                <input type="submit" value="Saving..." disabled />
+              ) : (
+                <input type="submit" value="Submit" />
+              )}
             </div>
           </div>
         </form>
