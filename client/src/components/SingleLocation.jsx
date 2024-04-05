@@ -1,35 +1,82 @@
-import AddLocationItem from "./AddItem";
+import { useParams, Link } from "react-router-dom";
 import DeviceItem from "./DeviceItem";
 import styles from "./singlelocation.module.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import AddItem from "./AddItem";
 export default function SingleLocation() {
+  const { id } = useParams();
+  const [location, setLocation] = useState({});
+  const [devices, setDevices] = useState([]);
+  const [deviceCount, setDeviceCount] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/get_location/${id}`)
+      .then((res) => {
+        setLocation(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/get_devices/${id}`)
+      .then((res) => {
+        setDevices(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/get_devices_count/${id}`)
+      .then((res) => {
+        setDeviceCount(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
     <div className={styles.container}>
-      <p className={styles.title}>Locations / City Town</p>
+      <p className={styles.title}>Locations / {location.name}</p>
       <hr className={styles.line} />
       <div className={styles.table_container}>
         <table>
           <tbody>
             <tr>
               <td>Name:</td>
-              <td>City Town</td>
+              <td>{location.name}</td>
               <td>Address: </td>
-              <td colSpan={3}>No 7, Galle Road, Colombo</td>
+              <td colSpan={3}>{location.address}</td>
             </tr>
             <tr>
               <td>Phone</td>
-              <td>+94 71719860</td>
+              <td>{location.phone}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p className={styles.title}>Devices</p>
+      <p className={styles.title}>Devices ({deviceCount})</p>
       <hr className={styles.line} />
       <div className={styles.grid_container}>
-        <DeviceItem serial_no={"ABC0123321"} isActive={true} type={"kisok"} />
-        <DeviceItem serial_no={"ABC0123321"} isActive={false} type={"kisok"} />
-        <DeviceItem serial_no={"ABC0123321"} isActive={false} type={"kisok"} />
-        <DeviceItem serial_no={"ABC0123321"} isActive={true} type={"kisok"} />
-        <AddLocationItem title={"Add New Device"} />
+        {devices.map((device, key) => (
+          <DeviceItem
+            serial_no={device.s_no}
+            isActive={device.is_active}
+            type={device.type}
+            key={key}
+          />
+        ))}
+        <Link to={`/newdevice/${id}`}>
+          <AddItem title={"Add New Device"} />
+        </Link>
       </div>
     </div>
   );

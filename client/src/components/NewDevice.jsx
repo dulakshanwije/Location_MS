@@ -1,8 +1,23 @@
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import styles from "./newdevice.module.css";
+import axios from "axios";
 export default function NewDevice() {
+  const { id } = useParams();
+  const [location, setLocation] = useState("");
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/get_location/${id}`)
+      .then((res) => {
+        setLocation(res.data.name);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   return (
     <div className={styles.container}>
-      <p className={styles.title}>Add New Device (Location: City Town)</p>
+      <p className={styles.title}>Add New Device ({location})</p>
       <hr className={styles.line} />
       <div>
         <form action="" method="post">

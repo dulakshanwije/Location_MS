@@ -82,6 +82,17 @@ app.get("/api/get_devices/:id", async (req, res) => {
   }
 });
 
+// Get Number of Devices by Location ID
+app.get("/api/get_devices_count/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const devices_count = await Device.countDocuments({ location_id: id });
+    res.status(200).json(devices_count);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 //Update device by Device ID
 app.put("/api/update_device/:id", async (req, res) => {
   try {
