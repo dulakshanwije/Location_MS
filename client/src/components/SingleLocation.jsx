@@ -15,28 +15,8 @@ export default function SingleLocation() {
       .get(`http://localhost:3000/api/get_location/${id}`)
       .then((res) => {
         setLocation(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/api/get_devices/${id}`)
-      .then((res) => {
-        setDevices(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/api/get_devices_count/${id}`)
-      .then((res) => {
-        setDeviceCount(res.data);
+        setDevices(res.data.devices);
+        setDeviceCount(res.data.devices.length);
       })
       .catch((e) => {
         console.log(e);

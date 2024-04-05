@@ -36,7 +36,7 @@ export default function Locations() {
                 name={location.name}
                 address={location.address}
                 phone={location.phone}
-                device_count={4}
+                device_count={location.devices.length}
               />
             </Link>
           ))}

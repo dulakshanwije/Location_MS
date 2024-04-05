@@ -20,7 +20,7 @@ app.listen(3000, () => {
 // Database connection
 mongoose
   .connect(
-    "mongodb+srv://dulakshanwije:uIdIeC4TyjFHeDF2@devicesms.g7sfmhi.mongodb.net/devicems_db"
+    "mongodb+srv://dulakshanwije:uIdIeC4TyjFHeDF2@devicesms.g7sfmhi.mongodb.net/locations_devices"
   )
   .then(() => {
     console.log("Database Connected");
@@ -40,15 +40,30 @@ app.post("/api/add_location", async (req, res) => {
   }
 });
 
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 // Add device
-app.post("/api/add_device", async (req, res) => {
-  try {
-    const device = await Device.create(req.body);
-    res.status(200).json(device);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+app.post(
+  "/api/add_device/:id",
+  upload.single("body.image"),
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const location = await Location.findByIdAndUpdate(id, {
+        $push: { devices: req.body },
+      });
+      if (!location) {
+        res.status(404).json("Location Not Found!");
+      }
+      const updatedLocation = await Location.findById(id);
+      res.status(200).json(updatedLocation);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+    // console.log(req.body);
   }
-});
+);
 
 // Get All Locations
 app.get("/api/get_locations", async (req, res) => {
@@ -75,8 +90,8 @@ app.get("/api/get_location/:id", async (req, res) => {
 app.get("/api/get_devices/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const devices = await Device.find({ location_id: id });
-    res.status(200).json(devices);
+    const location = await Location.findById(id);
+    res.status(200).json(location.devices);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -86,7 +101,8 @@ app.get("/api/get_devices/:id", async (req, res) => {
 app.get("/api/get_devices_count/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const devices_count = await Device.countDocuments({ location_id: id });
+    const location = await Location.findById(id);
+    const devices_count = location.devices.length;
     res.status(200).json(devices_count);
   } catch (error) {
     res.status(500).json({ message: error.message });
