@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
 const Location = require("./models/location.model");
 const Device = require("./models/device.model");
 
 // JSON middleware
 app.use(express.json());
+app.use(cors());
 
 app.get("/", function (req, res) {
   res.send("Hello World");
