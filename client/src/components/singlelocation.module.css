@@ -37,6 +37,10 @@
   border: 1px solid #b2b5be79;
 }
 
+a {
+  color: inherit;
+}
+
 @media screen and (max-width: 1200px) {
   .container {
     width: 90%;

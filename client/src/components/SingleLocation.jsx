@@ -28,10 +28,12 @@ export default function SingleLocation() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.title}>Locations / {location.name}</p>
+      <p className={styles.title}>
+        <Link to="/">Locations</Link> / {location.name}
+      </p>
       <hr className={styles.line} />
       {isLoading ? (
-        <Loading />
+        <Loading isLoading={isLoading} />
       ) : (
         <>
           <div className={styles.table_container}>
