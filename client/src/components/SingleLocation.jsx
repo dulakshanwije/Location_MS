@@ -38,13 +38,13 @@ export default function SingleLocation() {
             <table>
               <tbody>
                 <tr>
-                  <td>Name:</td>
+                  <td className={styles.table_cap}>Name:</td>
                   <td>{location.name}</td>
-                  <td>Address: </td>
+                  <td className={styles.table_cap}>Address: </td>
                   <td colSpan={3}>{location.address}</td>
                 </tr>
                 <tr>
-                  <td>Phone</td>
+                  <td className={styles.table_cap}>Phone</td>
                   <td>{location.phone}</td>
                 </tr>
               </tbody>

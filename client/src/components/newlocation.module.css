@@ -83,3 +83,15 @@
 .button_container input[type="submit"]:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .formitems_container {
+    width: 90%;
+  }
+}

@@ -36,3 +36,31 @@
 .line {
   border: 1px solid #b2b5be79;
 }
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .grid_container {
+    display: grid;
+    grid-template-columns: 40% 40%;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .grid_container {
+    display: grid;
+    grid-template-columns: 100%;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .table_container .table_cap {
+    display: none;
+  }
+}
