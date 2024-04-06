@@ -2,6 +2,29 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./newdevice.module.css";
 import axios from "axios";
+import Select from "react-select";
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    background: "transparent",
+    color: "red",
+    display: "flex",
+    flexWrap: "nowrap",
+    width: "100%",
+  }),
+  menu: (provided) => ({
+    ...provided,
+    background: "#ebebef",
+    width: "100%",
+    color: "#0d111d",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "#ebebef",
+  }),
+};
+
 export default function NewDevice() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -10,7 +33,7 @@ export default function NewDevice() {
   const [data, setData] = useState({
     s_no: "",
     type: "",
-    is_active: "",
+    is_active: true,
     image: null,
   });
 
@@ -48,6 +71,10 @@ export default function NewDevice() {
         console.log(e);
       });
   }
+
+  function handleSelect(option) {
+    setData({ ...data, type: option.value });
+  }
   return (
     <div className={styles.container}>
       <p className={styles.title}>Add New Device ({location})</p>
@@ -66,23 +93,46 @@ export default function NewDevice() {
             </span>
             <span>
               <label htmlFor="type">Device Type:</label>
-              <input
-                id="type"
-                type="text"
-                value={data.type}
-                onChange={(e) => setData({ ...data, type: e.target.value })}
+              <Select
+                className={styles.select_tag}
+                options={type_options}
+                placeholder="Select device type"
+                defaultValue={null}
+                onChange={(option) => {
+                  handleSelect(option);
+                }}
+                styles={customStyles}
               />
             </span>
             <span>
-              <label htmlFor="status">Current Status:</label>
-              <input
-                id="type"
-                type="text"
-                value={data.is_active}
-                onChange={(e) =>
-                  setData({ ...data, is_active: e.target.value })
-                }
-              />
+              <label htmlFor="status">Device Status:</label>
+              <div className={styles.radio_container}>
+                <span className={styles.radio_button}>
+                  <input
+                    checked={true}
+                    type="radio"
+                    id="active"
+                    name="status"
+                    value={true}
+                    onChange={(e) =>
+                      setData({ ...data, is_active: e.target.value })
+                    }
+                  />
+                  <label htmlFor="active">Active</label>
+                </span>
+                <span className={styles.radio_button}>
+                  <input
+                    type="radio"
+                    id="deactive"
+                    name="status"
+                    value={false}
+                    onChange={(e) =>
+                      setData({ ...data, is_active: e.target.value })
+                    }
+                  />
+                  <label htmlFor="deactive">Deactive</label>
+                </span>
+              </div>
             </span>
             <span>
               <label htmlFor="image">Device Image:</label>

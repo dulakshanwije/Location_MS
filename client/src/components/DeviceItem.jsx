@@ -67,7 +67,7 @@ export default function DeviceItem({
           <p className={styles.title}>{serial_no}</p>
         </span>
         <span>
-          <p>Type: {type}</p>
+          <p style={{ textTransform: "capitalize" }}>Type: {type}</p>
           <p>Status: {isActive ? "Active" : "Deactive"}</p>
         </span>
       </div>
