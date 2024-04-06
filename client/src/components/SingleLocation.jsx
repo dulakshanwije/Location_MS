@@ -60,6 +60,8 @@ export default function SingleLocation() {
                 type={device.type}
                 key={key}
                 image={device.image}
+                device_id={device._id}
+                location_id={id}
               />
             ))}
             <Link to={`/newdevice/${id}`}>

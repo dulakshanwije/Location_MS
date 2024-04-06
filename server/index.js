@@ -116,33 +116,43 @@ app.get("/api/get_devices_count/:id", async (req, res) => {
   }
 });
 
-//Update device by Device ID
-app.put("/api/update_device/:id", async (req, res) => {
+// //Update device by Device ID
+app.put("/api/update_device/:location_id/:device_id", async (req, res) => {
   try {
-    const { id } = req.params;
-    const device = await Device.findById(id);
-    if (!device) {
-      return res.status(404).json({ message: "Device Not Found!" });
+    const { location_id, device_id } = req.params;
+    const location = await Location.findById(location_id);
+    if (!location) {
+      res.status(404).json({ message: "Location not found!!!" });
     }
-    const device2 = await Device.findByIdAndUpdate(id, {
-      is_active: !device.is_active,
-    });
-    const updatedDevice = await Device.findById(id);
-    res.status(200).json(updatedDevice);
+    if (location.devices.id(device_id) != null) {
+      const status = location.devices.id(device_id).is_active;
+      location.devices.id(device_id).is_active = !status;
+      location.markModified("devices");
+      await location.save();
+      res.status(200).json({ message: "Updateed Successfully" });
+    } else {
+      res.status(404).json({ message: "Device not found!!!" });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
 // Delete device by Device ID
-app.delete("/api/delete_device/:id", async (req, res) => {
+app.delete("/api/delete_device/:location_id/:device_id", async (req, res) => {
   try {
-    const { id } = req.params;
-    const device = await Device.findByIdAndDelete(id);
-    if (!device) {
+    const { location_id, device_id } = req.params;
+    const location = await Location.findById(location_id);
+    if (!location) {
+      res.status(404).json({ message: "Location not found!!!" });
+    }
+    if (location.devices.id(device_id) != null) {
+      await location.devices.id(device_id).deleteOne();
+      await location.save();
+      res.status(200).json({ message: "Removed Successfully" });
+    } else {
       res.status(404).json({ message: "Device not found!!!" });
     }
-    res.status(200).json({ message: "Device deleted successfully!" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
