@@ -1,6 +1,7 @@
 const Location = require("../models/location.model");
 const fs = require("fs");
 
+//Add new location
 const addLocation = async (req, res) => {
   try {
     const location = await Location.create(req.body);
@@ -10,6 +11,7 @@ const addLocation = async (req, res) => {
   }
 };
 
+// Add new device
 const addDevice = async (req, res) => {
   try {
     const { id } = req.params;
@@ -27,6 +29,7 @@ const addDevice = async (req, res) => {
   }
 };
 
+// Get all devices
 const getAllLocations = async (req, res) => {
   try {
     const locations = await Location.find({});
@@ -36,30 +39,42 @@ const getAllLocations = async (req, res) => {
   }
 };
 
+// Get location by id
 const getLocationById = async (req, res) => {
   try {
     const { id } = req.params;
     const location = await Location.findById(id);
+    if (!location) {
+      res.status(404).json("Location Not Found!");
+    }
     res.status(200).json(location);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+// Get device by device ID
 const getDeviceById = async (req, res) => {
   try {
     const { id } = req.params;
     const location = await Location.findById(id);
+    if (!location) {
+      res.status(404).json("Location Not Found!");
+    }
     res.status(200).json(location.devices);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+// Get device count by location ID
 const getDeviceCountById = async (req, res) => {
   try {
     const { id } = req.params;
     const location = await Location.findById(id);
+    if (!location) {
+      res.status(404).json("Location Not Found!");
+    }
     const devices_count = location.devices.length;
     res.status(200).json(devices_count);
   } catch (error) {
@@ -67,6 +82,7 @@ const getDeviceCountById = async (req, res) => {
   }
 };
 
+// Update device by device ID
 const updateDevice = async (req, res) => {
   try {
     const { location_id, device_id } = req.params;
@@ -88,6 +104,7 @@ const updateDevice = async (req, res) => {
   }
 };
 
+// Delete device by device ID
 const deleteDevice = async (req, res) => {
   try {
     const { location_id, device_id } = req.params;
