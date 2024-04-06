@@ -16,6 +16,7 @@ const DeviceSchema = new Schema({
   },
   image: {
     type: "String",
+    require: true,
   },
   date_added: {
     type: Date,
@@ -30,9 +31,11 @@ const LocationSchema = new Schema({
   },
   address: {
     type: "String",
+    default: "Address not given",
   },
   phone: {
     type: "String",
+    default: "Phone not given",
   },
   date_added: {
     type: Date,

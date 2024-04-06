@@ -96,6 +96,7 @@ export default function NewDevice() {
                     id="s_no"
                     type="text"
                     value={data.s_no}
+                    required={true}
                     onChange={(e) => setData({ ...data, s_no: e.target.value })}
                   />
                 </span>
@@ -106,6 +107,7 @@ export default function NewDevice() {
                     options={type_options}
                     placeholder="Select device type"
                     defaultValue={null}
+                    required={true}
                     onChange={(option) => {
                       handleSelect(option);
                     }}
@@ -145,6 +147,7 @@ export default function NewDevice() {
                 <span>
                   <label htmlFor="image">Device Image:</label>
                   <input
+                    required={true}
                     type="file"
                     name=""
                     id="image"

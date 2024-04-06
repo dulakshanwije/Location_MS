@@ -36,6 +36,7 @@ export default function NewLocation() {
                 type="text"
                 value={data.name}
                 onChange={(e) => setData({ ...data, name: e.target.value })}
+                required={true}
               />
             </span>
             <span>
